@@ -1,0 +1,397 @@
+@import 'variables';
+
+.products {
+  padding-bottom: 200px;
+}
+
+.toolbar {
+  background-color: $nav-background;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+
+  .toolbar-row {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $base-padding 0;
+
+    .profile,
+    .basket {
+      position: absolute;
+      display: flex;
+      align-items: center;
+
+      img {
+        width:27px;
+      }
+    }
+
+    .profile {
+      left: 0;
+
+      img {
+        cursor: pointer;
+        height: 32px;
+      }
+    }
+
+    .basket {
+      right: 0;
+      cursor: pointer;
+    }
+
+    .wallet-icon {
+      margin-left: $base-margin;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 100px;
+
+        @media (max-width: 768px) {
+          width: 64px;
+        }
+      }
+    }
+  }
+}
+
+.product {
+  margin-top: $base-margin;
+  padding-bottom: $base-padding;
+  border-bottom: 1px solid $white;
+  color: $white;
+
+  @media (max-width: 568px) {
+    font-size: 12px;
+  }
+
+  .product-image,
+  .product-price,
+  .space,
+  .delete-icon {
+    width: 20%;
+
+    @media (max-width: 468px) {
+      width: 25%;
+    }
+  }
+
+  .product-image {
+    height: 100%;
+  }
+
+  .product-price {
+    text-align: center;
+  }
+
+  .product-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-name,
+  .product-number {
+    width: 60%;
+    padding: 0 $medium-padding;
+
+    @media (max-width: 468px) {
+      width: 50%;
+      padding: 0 $base-padding;
+    }
+  }
+
+  .product-info {
+    display: flex;
+  }
+
+  .product-status {
+    display: flex;
+    margin-top: $small-margin;
+
+    .product-number {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        margin: 0;
+      }
+
+      img {
+        cursor: pointer;
+        width: 18px;
+      }
+    }
+
+    .delete-icon {
+      width: 18px;
+      height: 18px;
+      margin: auto;
+      cursor: pointer;
+    }
+  }
+
+  .product-text {
+    color: $yellow;
+    margin: 0;
+  }
+
+}
+
+.receive {
+  background-color: $light-black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding-bottom: $base-padding;
+
+  .total-price {
+    display: flex;
+    justify-content: space-between;
+    color: $white;
+  }
+
+  .receives-type {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .choose-receive {
+    width: 49%;
+    background-color: $dark-red;
+    border-radius: $small-radius;
+    color: $white;
+    display: flex;
+    margin-top: $base-margin;
+    justify-content: center;
+    align-items: center;
+    padding: $small-padding;
+    border: none;
+    cursor: pointer;
+
+    img {
+      width: 32px;
+      margin-right: 2*$small-margin;
+
+      @media (max-width: 768px) {
+        width: 26px;
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+
+  }
+
+  .choose-receive:disabled,
+  .choose-receive[disabled] {
+    background-color: $light-gray;
+    cursor: context-menu;
+  }
+
+}
+
+.receive-form {
+
+  input {
+    width: 100%;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid $white;
+    border-radius: $small-radius;
+    color: $white;
+    padding: 2*$small-padding;
+  }
+
+  .cancel-button {
+    display: flex;
+    justify-content: flex-end;
+
+    p {
+      color: $yellow;
+      padding: 2px 12px;
+      border: 1px solid $white;
+      border-radius: 12px;
+      cursor: pointer;
+
+      @media (max-width: 568px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .submit-button {
+    background-color: $dark-red;
+    border-radius: $small-radius;
+    color: $white;
+    text-align: center;
+    margin-top: $base-margin;
+    padding: 2*$small-padding $small-padding;
+    cursor: pointer;
+  }
+
+  .enter-form-text {
+    display: flex;
+    justify-content: space-between;
+
+    .hint {
+      color: $white;
+      width: 100%;
+    }
+
+    .hint-text {
+      padding-right: $medium-padding;
+    }
+
+    .edit-button {
+      float: right;
+      color: $yellow;
+      padding: 2px 12px;
+      border: 1px solid $white;
+      border-radius: 12px;
+      cursor: pointer;
+
+      @media (max-width: 568px) {
+        font-size: 12px;
+      }
+    }
+
+  }
+
+}
+
+.upc-list {
+  padding-top: $base-padding;
+  padding-bottom: $distance-bottom-nav;
+
+  .upc-products {
+    padding: $base-padding;
+    background-color: $white;
+    border-radius: $small-radius;
+    margin-top: $base-margin;
+
+    p {
+      margin-bottom: $small-margin;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: wrap;
+
+      .title {
+        margin-right: $small-margin;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    .product-count {
+      display: flex;
+      align-items: center;
+      margin: $small-margin 2*$small-margin;
+      margin-top: 0;
+      
+      img {
+        filter: brightness(0%);
+        transform: rotate(45deg);
+        width: 16px;
+        margin-right: $small-margin;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .not-found-upc,
+    .upc-barcode {
+      text-align: center;
+    }
+  }
+
+  .continue-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $light-black;
+    padding-bottom: $base-padding;
+
+    .help-button {
+      background-color: $orange;
+      margin-top: 2*$small-margin;
+      padding: $small-padding 0;
+      color: $white;
+      width: 100%;
+    }
+  }
+}
+
+#invoiceList {
+  display: none;
+}
+
+@media print {
+  .cart-page {
+    display: none;
+  }
+
+  #invoiceList {
+    display: block;
+
+    .container {
+      width: 100%;
+      max-width: 300px;
+      margin: auto;
+      padding: 0px 15px;
+      position: relative;
+    }
+
+    p {
+      margin: 4px 0;
+    }
+
+    .card-text {
+      margin-top: 12px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 12px
+    }
+
+    .logo img {
+      width: 150px;
+    }
+
+    .invoices {
+      text-align: center;
+    }
+
+    .footer{
+      max-width: 200px;
+      text-align: center;
+      margin: auto;
+      margin-top: 8px;
+      .main-text{
+        font-weight: bold;
+        margin-bottom: 8px;
+        line-height: 19px;
+      }
+    }
+  }
+}

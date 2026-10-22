@@ -1,0 +1,20 @@
+@import 'variables';
+
+.resend-bottom-sheet{
+    padding-bottom: $base-padding;
+}
+
+button{
+    background-color: $light-red;
+    border-radius: 0;
+    width: 100%;
+    color: $white;
+    margin-top: $base-margin;
+}
+
+.title{
+    color: $white;
+    text-align: center;
+    margin: 0;
+    margin-top: $base-margin;
+}

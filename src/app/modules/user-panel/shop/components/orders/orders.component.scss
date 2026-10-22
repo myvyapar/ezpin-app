@@ -1,0 +1,243 @@
+@import "variables";
+
+p,
+button {
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.tabs {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 72px;
+  padding: 12px 0;
+  background-color: $light-black;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+
+  @media (max-width: 768px) {
+    top: 55px;
+  }
+
+  .choice-tab {
+    flex: 1;
+    margin: 0 $small-margin;
+    border: 1px solid $dark-red;
+    border-radius: $small-radius;
+    padding: $small-padding;
+    text-align: center;
+    cursor: pointer;
+
+    p {
+      color: $white;
+      margin: 0;
+    }
+  }
+}
+
+.notShow {
+  display: none;
+}
+
+.selected-button {
+  background-color: $dark-red;
+}
+
+.eGift-orders {
+  .eGift {
+    margin: 2 * $small-margin 0;
+    padding: 2 * $small-padding $base-padding;
+    border-radius: $small-radius;
+    background-color: $white;
+
+    p {
+      margin: 0;
+    }
+
+    .group-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2 * $small-margin;
+
+      button {
+        width: 49%;
+        color: $white;
+        background-color: $dark-gray;
+      }
+
+      button:disabled,
+      button[disabled] {
+        background-color: $light-gray;
+      }
+
+      .detail-button {
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+.physical-orders {
+  .physical {
+    margin: 2 * $small-margin 0;
+    padding: 2 * $small-padding $base-padding;
+    border-radius: $small-radius;
+    background-color: $dark-gray;
+    color: $white;
+
+    p {
+      margin: 0;
+    }
+
+    .status {
+      color: $green;
+    }
+
+    .failed {
+      color: $dark-red;
+    }
+  }
+}
+
+.crypto-orders {
+  .crypto {
+    margin: 2 * $small-margin $base-padding;
+    padding: 2 * $small-padding 0;
+    border-bottom: 1px solid $dark-gray;
+
+    .crypto-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    p {
+      margin: 0;
+      color: $white-smoke;
+    }
+  }
+
+  .group-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2 * $small-margin;
+
+    button {
+      flex: 1;
+      color: $white;
+      background-color: #ef6c00;
+    }
+
+    .resend-button {
+      margin-right: 2 * $small-margin;
+    }
+
+    button:disabled,
+    button[disabled] {
+      background-color: $light-gray;
+    }
+
+    .help-crypto-btn {
+      background-color: $orange;
+      color: $white;
+    }
+  }
+}
+
+.help-button {
+  background-color: $orange;
+  margin-top: 2 * $small-margin;
+  color: $white;
+  width: 100%;
+}
+
+.mat-raised-button {
+  line-height: 26px;
+}
+
+.eGift-detail {
+  color: $white-smoke;
+
+  .back-button {
+    color: $dark-red;
+    padding: 2 * $small-padding 0;
+
+    span {
+      cursor: pointer;
+    }
+  }
+
+  p {
+    margin-bottom: 2 * $small-margin;
+  }
+
+  .title {
+    text-align: center;
+    padding-top: $base-padding;
+    font-size: 16px;
+  }
+
+  .tables {
+    padding-bottom: $medium-padding;
+
+    .table-title {
+      text-align: center;
+      color: $white;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table,
+    th,
+    td {
+      border-bottom: 1px solid $white-smoke;
+      border-collapse: collapse;
+      text-align: center;
+      font-weight: normal;
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
+    th,
+    td {
+      width: 25%;
+      padding: $small-padding 0;
+    }
+  }
+
+  .detail-eGift-order {
+    position: fixed;
+    background-color: $light-black;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 12px;
+
+    p {
+      text-align: end;
+      color: $white;
+    }
+    button {
+      background-color: $light-red;
+      width: 100%;
+      padding: 2 * $small-padding 0;
+      color: $white;
+    }
+  }
+}
+
+.empty-field {
+  text-align: center;
+  padding-top: $base-padding;
+  color: $white;
+}
+
+.center {
+  text-align: center;
+  margin: 5px 0px;
+}

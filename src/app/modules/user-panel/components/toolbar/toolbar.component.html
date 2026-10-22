@@ -1,0 +1,55 @@
+
+<ion-header class="app-toolbar-header">
+  <ion-toolbar class="custom-toolbar">
+    <div class="toolbar-container">
+      <div class="toolbar-row">
+
+        <!-- Favorite Icon -->
+        <div
+          class="profile"
+          *ngIf="isShowFavorite && isEGiftPage">
+
+          <ion-img
+            src="/assets/images/icons/favorite-link.svg"
+            [routerLink]="['/panel/shop/favorite']"
+            class="favorite-icon">
+          </ion-img>
+
+        </div>
+
+        <!-- Left Empty Space -->
+        <div *ngIf="!isShowFavorite || !isEGiftPage"></div>
+
+        <!-- Center Logo -->
+        <div class="logo">
+          <ion-img
+            src="/assets/images/ezpin_no_text.png"
+            alt="Logo">
+          </ion-img>
+        </div>
+
+        <!-- Right Menu -->
+        <div class="menu" *ngIf="!isMenuPage">
+
+          <ion-img
+            *ngIf="isShowFavorite && isEGiftPage"
+            [src]="regionFlag"
+            class="flag"
+            (click)="openRegions()">
+          </ion-img>
+
+          <ion-img
+            src="/assets/images/icons/hamburger-menu.svg"
+            [routerLink]="['/panel/shop/menu']"
+            class="basket-icon">
+          </ion-img>
+
+        </div>
+
+        <!-- Empty Right Space on Menu Page -->
+        <div class="menu" *ngIf="isMenuPage"></div>
+
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>

@@ -1,0 +1,259 @@
+<div class="cart-page" *ngIf="!invoices">
+  <div *ngIf="!isUPC">
+    <div class="toolbar">
+      <div class="container">
+        <div class="toolbar-row">
+          <div class="profile">
+            <img
+              src="/assets/images/icons/favorite-link.svg"
+              [routerLink]="['/panel/shop/favorite']"
+            />
+          </div>
+          <div class="logo">
+            <img src="/assets/images/ezpin_no_text.png" />
+          </div>
+          <div class="basket" (click)="linkToUPC()">
+            <img
+              class="basket-icon"
+              src="/assets/images/icons/barcodeLarge.png"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="products">
+        <div
+          class="product"
+          *ngFor="
+            let product of productList?.products;
+            let productIndex = index
+          "
+        >
+          <div class="product-info">
+            <img
+              class="product-image"
+              defaultImage="/assets/images/ic_placeholder.jpg"
+              [lazyLoad]="product.image"
+            />
+            <p class="product-name">
+              {{ product.name }} {{ productList?.currency }}{{ product.price }}
+            </p>
+            <p class="product-price">
+              {{ product.currency }}{{ product.showPrice | number : "1.0-2" }}
+            </p>
+          </div>
+          <div class="product-status">
+            <div class="space"></div>
+            <div class="product-number">
+              <img
+                class="minus"
+                src="/assets/images/icons/w-minus.svg"
+                (click)="minus(productIndex)"
+              />
+              <p class="count">{{ product.count }}</p>
+              <img
+                class="plus"
+                src="/assets/images/icons/w-plus.svg"
+                (click)="plus(productIndex)"
+              />
+            </div>
+            <img
+              class="delete-icon"
+              src="/assets/images/icons/garbage.png"
+              (click)="deleteProduct(productIndex)"
+            />
+          </div>
+          <p
+            class="product-text"
+            *ngIf="
+              productList?.type === 'preOrder' ||
+              (product.count > 5 &&
+                productList?.supperImmediate &&
+                product.count > product.availableCard) ||
+              (!productList?.supperImmediate &&
+                productList?.type != 'preOrder' &&
+                product.count > product.availableCard)
+            "
+          >
+            {{ product.status }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="receive">
+      <div class="container">
+        <div class="total-price">
+          <p>Total</p>
+          <p>
+            {{ productList?.showCurrency }}{{ totalPrice | number : "1.0-2" }}
+          </p>
+        </div>
+        <div *ngIf="!isSelectedReceive" class="receives-type">
+          <button
+            class="choose-receive"
+            (click)="selectReceive('whatsapp')"
+            [disabled]="!isActiveButton.whatsapp"
+          >
+            <img src="/assets/images/icons/whatsapp_icon.png" />
+            <p>WhatsApp</p>
+          </button>
+          <button
+            class="choose-receive"
+            (click)="selectReceive('phone')"
+            [disabled]="!isActiveButton.sms"
+          >
+            <img src="/assets/images/icons/sms_icon.png" />
+            <p>SMS</p>
+          </button>
+          <button
+            class="choose-receive"
+            (click)="selectReceive('email')"
+            [disabled]="!isActiveButton.email"
+          >
+            <img src="/assets/images/icons/email_icon.png" />
+            <p>Email</p>
+          </button>
+          <!-- <button
+            class="choose-receive"
+            (click)="selectReceive('print')"
+            [disabled]="
+              !isActiveButton.print || productList?.type != 'available'
+            "
+          >
+            <img src="/assets/images/icons/print.svg" />
+            <p>Print</p>
+          </button> -->
+        </div>
+        <div class="receive-form" *ngIf="isSelectedReceive">
+          <div class="cancel-button">
+            <p (click)="cancelReceive()">Cancel</p>
+          </div>
+          <div class="enter-form-text">
+            <p class="hint">
+              <span class="hint-text">
+                Please <span *ngIf="!isSecondStep">Enter</span>
+                <span *ngIf="isSecondStep">ReEnter</span> the
+                <span *ngIf="receiveType === 'email'">Email</span>
+                <span *ngIf="receiveType != 'email'">phone</span> to receive the
+                pin code
+              </span>
+              <span
+                class="edit-button"
+                *ngIf="isSecondStep"
+                (click)="editForm()"
+                >Need Edit?</span
+              >
+            </p>
+          </div>
+
+          <input [formControl]="receiveForm" />
+          <div class="submit-button" (click)="submit()">
+            <span *ngIf="!isSecondStep">Submit</span>
+            <span *ngIf="isSecondStep">Confirm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="upc-list" *ngIf="isUPC">
+    <div class="container">
+      <div
+        class="upc-products"
+        *ngFor="let upcProduct of productList?.products"
+      >
+        <div class="info">
+          <p class="title">
+            {{ upcProduct.name }} {{ productList?.currency
+            }}{{ upcProduct.price }}
+          </p>
+          <div class="product-count">
+            <img src="/assets/images/icons/w-plus.svg" />
+            <p>{{ upcProduct.count }}</p>
+          </div>
+        </div>
+        <p>
+          Price: {{ upcProduct.currency
+          }}{{ upcProduct.showPrice | number : "1.0-2" }}
+        </p>
+        <p class="not-found-upc" *ngIf="!upcProduct.upc">UPC not found!</p>
+        <!-- <div class="upc-barcode" *ngIf="upcProduct.upc">
+          <ngx-barcode [bc-value]="upcProduct.upc" bc-height="40" bc-font-size="14" bc-width="2" bc-font="helvetica"
+            bc-line-color="#000000" bc-format="UPC" bc-background="#ffffff" bc-text-align="center"
+            [bc-display-value]="true">
+          </ngx-barcode>
+        </div> -->
+      </div>
+    </div>
+    <div class="continue-button">
+      <div class="container">
+        <button mat-raised-button class="help-button" (click)="backToCart()">
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="invoices" id="invoiceList">
+  <div class="container">
+    <div class="logo">
+      <img [src]="invoices.logo" />
+    </div>
+    <p>
+      {{
+        (
+          invoices?.created_time
+          | date : "MMMM d, y, h:mm:ss a z"
+          | convertTimezone
+        ).date
+      }}
+      {{
+        (
+          invoices?.created_time
+          | date : "MMMM d, y, h:mm:ss a z"
+          | convertTimezone
+        ).time
+      }}
+    </p>
+    <p>Order Number: {{ invoices?.id }}</p>
+    <!-- <p> Reference Code: {{invoices?.reference_code}}</p> -->
+    <div class="invoices" *ngFor="let invoice of invoices?.items">
+      ********************
+      <p>{{ invoice.name }}</p>
+      <p class="card-text">
+        <span *ngIf="invoice?.card_number_text">{{
+          invoice?.card_number_text
+        }}</span>
+        <span *ngIf="!invoice?.card_number_text">Card Number</span>
+      </p>
+      <p>{{ invoice.card_number }}</p>
+      <p *ngIf="invoice?.show_pin && invoice?.pin_code" class="card-text">
+        <span *ngIf="invoice.pin_text">{{ invoice.pin_text }}</span>
+        <span *ngIf="!invoice.pin_text">Pin Code:</span>
+      </p>
+      <p *ngIf="invoice?.show_pin && invoice?.pin_code">
+        {{ invoice.pin_code }}
+      </p>
+      <!-- <ngx-barcode [bc-value]="invoice.upc" bc-height="40" bc-font-size="14" bc-width="2" bc-font="helvetica"
+        bc-line-color="#000000" bc-background="#ffffff" bc-format="UPC" bc-text-align="center"
+        [bc-display-value]="true">
+      </ngx-barcode> -->
+    </div>
+    <div class="footer">
+      ********************
+      <div class="qr-code">
+        <ngx-qrcode
+          elementType="url"
+          [value]="invoices?.share_link"
+          errorCorrectionLevel="L"
+        >
+        </ngx-qrcode>
+      </div>
+      <p class="main-text" [innerHtml]="invoices?.custom_text_two"></p>
+      <p>{{ invoices?.custom_text_one }}</p>
+    </div>
+  </div>
+</div>

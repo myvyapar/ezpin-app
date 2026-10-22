@@ -1,0 +1,76 @@
+<div>
+  <div class="no-price-found" *ngIf="!hasBuyingPrice">
+    No buying price found
+  </div>
+
+  <div class="product-info" *ngIf="hasBuyingPrice">
+    <div class="container">
+      <div class="center-detail">
+        <img
+          [src]="data.product.image || '/assets/images/ic_placeholder.jpg'"
+        />
+        <p class="product-name">
+          {{ data.product.title }}
+        </p>
+        <!-- <ngx-barcode [bc-value]="data.product.upc" bc-height="40" bc-format="UPC" bc-font-size="14" bc-width="1"
+          bc-font="helvetica" bc-line-color="#ffff" bc-background="none" [bc-display-value]="true"></ngx-barcode> -->
+      </div>
+      <div class="price-info">
+        <p class="title">Card Number</p>
+        <p class="description">
+          {{ data.serial }}
+        </p>
+      </div>
+      <div class="price-info" *ngIf="!hasRange">
+        <p class="title">Price</p>
+        <p class="description">
+          {{ data.product.currency_data.symbol }}{{ data.product.price_min }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="multi-price" *ngIf="hasRange">
+    <div class="container">
+      <p>You can choose among following suggestions:</p>
+      <div class="row">
+        <div class="col-3" *ngFor="let suggestion of data.product.suggestions">
+          <div class="content" (click)="choosePrice(suggestion.price)">
+            {{ data.product.currency_data.symbol }}{{ suggestion.price }}
+          </div>
+        </div>
+      </div>
+      <p class="or">OR</p>
+      <p>Enter your desired amount:</p>
+      <div class="form">
+        <input [formControl]="priceRange" twoDigitDecimalNumber />
+      </div>
+      <p>{{ inputMessage }}</p>
+    </div>
+    <div class="button">
+      <div class="addButton">
+        <div class="continueButton" (click)="cancel()">CANCEL</div>
+        <div
+          class="checkoutButton"
+          [class.diActive]="invalidInput"
+          (click)="confirm('true')"
+        >
+          CONFIRM
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button" *ngIf="!hasRange">
+    <div class="addButton">
+      <div class="continueButton" (click)="cancel()">CANCEL</div>
+      <div
+        class="checkoutButton"
+        [class.diActive]="!hasBuyingPrice"
+        (click)="confirm()"
+      >
+        CONFIRM
+      </div>
+    </div>
+  </div>
+</div>

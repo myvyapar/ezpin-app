@@ -1,0 +1,24 @@
+image: trion/ng-cli-karma
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq sshpass
+
+deploy_production:
+  stage: deploy
+  environment: Production
+  tags:
+    - panel
+  only:
+    - /^v.*/
+  script:
+    - rm -rf node_modules
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - cd dist/
+    - ls
+    - lftp -c "set sftp:auto-confirm yes ; open -u web-deploy,$USER_PASS2 sftp://con.ezpin.com ;cd ezpin/pos; mirror -e -R -p . . ; quit"

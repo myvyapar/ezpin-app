@@ -1,0 +1,38 @@
+<div class="eGift">
+  <div class="container">
+    <div
+      class="search"
+      *ngIf="!isProductList && !isProductCategory"
+      [routerLink]="['/panel/shop/search']"
+    >
+      <img src="/assets/images/icons/ic_search.png" />
+      <p>Search Gifts</p>
+    </div>
+    <p
+      class="back-button"
+      *ngIf="isProductCategory || (isProductList && products)"
+    >
+      <span (click)="backStep()">Back</span>
+    </p>
+
+    <div class="categories" *ngIf="!isProductList">
+      <div
+        class="category"
+        *ngFor="let category of categoryList"
+        (click)="onCategoryClick(category)"
+      >
+        <img
+          defaultImage="/assets/images/ic_placeholder.jpg"
+          [lazyLoad]="category.avatar"
+        />
+        <p>{{ category.name }}</p>
+      </div>
+    </div>
+
+    <div class="products" *ngIf="isProductList && products">
+      <div *ngFor="let product of products">
+        <product-card [category]="product"></product-card>
+      </div>
+    </div>
+  </div>
+</div>

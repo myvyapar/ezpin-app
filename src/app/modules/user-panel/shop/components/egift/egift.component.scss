@@ -1,0 +1,140 @@
+@import 'variables';
+
+.eGift {
+  position: relative;
+}
+
+.search {
+  background-color: #424242;
+  display: flex;
+  justify-content: center;
+  margin: $base-margin 0;
+  border-radius: 50px;
+  padding: $small-padding;
+  align-items: center;
+  cursor: pointer;
+  
+  img {
+    width: 32px;
+    margin-right: $base-margin;
+  }
+
+  p {
+    margin: 0;
+    color: $white-smoke;
+  }
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+
+  .category {
+    width: 25%;
+    padding: 0 $small-padding;
+    margin-top: $base-margin;
+   
+    @media (max-width: 768px) {
+      width: 33.33%;
+    }
+
+    img {
+      width: 100%;
+      border-radius: $small-radius;
+      cursor: pointer;  
+    }
+
+    p {
+      text-align: center;
+      color: $white-smoke;
+      margin: 0;
+      cursor: pointer;  
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+.favorite {
+  position: -webkit-sticky;
+  position: sticky;
+  display: none;
+  bottom: 0px;
+  background-color: $red;
+  float: right;
+  border-radius: 100%;
+  width: 64px;
+  height: 64px;
+  padding: $base-padding;
+  transition: all 0.2s ease-in;
+  visibility: hidden;
+
+  img {
+    width: 100%;
+  }
+}
+
+.show-favorite {
+  visibility: visible;
+  cursor: pointer;
+  transform: translateY(-80px);
+}
+
+.visible-favorite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-button{
+  color: $dark-red;
+  margin : 2*$small-margin 0;
+  span{
+    cursor: pointer;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes singleblink {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+.ng-lazyloading {
+  animation-name: blink;
+  animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.ng-lazyloaded {
+  animation-name: singleblink;
+  animation-duration: 1s;
+  animation-delay: 0s !important;
+}
+
+.products{
+  margin-top: $base-margin;
+}
+

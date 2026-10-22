@@ -1,0 +1,26 @@
+@import 'variables';
+
+p {
+  color: $white;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  p {
+    padding: $small-padding $base-padding;
+    cursor: pointer;
+
+  }
+
+  .ok {
+    color: rgb(18, 161, 18);
+    margin: 0;
+  }
+
+  .cancel {
+    color: $red;
+    margin: 0;
+  }
+}

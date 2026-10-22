@@ -1,0 +1,25 @@
+@import 'variables';
+
+.title{
+    text-align: center;
+}
+
+
+.form{
+    mat-form-field {
+        width: 100%;
+        margin: $small-margin 0px;
+        font-size: $primary-description;
+        padding: 0;
+        @media (min-width: 1024px) {
+          width: 350px;
+        }
+      }
+
+      ::ng-deep{
+        .mat-form-field-wrapper{
+            padding: 0;
+        }
+      }
+    
+}

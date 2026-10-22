@@ -1,0 +1,57 @@
+@import 'variables';
+
+form {
+  display: flex;
+  background-color: $nav-background;
+  padding: $small-padding $base-padding;
+  margin: $base-margin 0;
+  border-radius: 100px;
+
+
+  input {
+    flex-grow: 1;
+    background: inherit;
+    border: none;
+    padding: 0 2*$small-padding;
+    color: $light-gray;
+    font-size: 16px;
+  }
+
+  ::placeholder { 
+    color: $light-gray;
+    opacity: 1; 
+  }
+  
+  :-ms-input-placeholder { 
+    color: $light-gray;
+  }
+  
+  ::-ms-input-placeholder { 
+    color: $light-gray;
+  }
+  
+  button {
+    background: none;
+    border: none;
+
+    img {
+      cursor: pointer;
+      width: 32px;
+    }
+  }
+
+}
+
+.emptyList{
+    margin-top: $base-margin;
+    color: $white-smoke;
+    text-align: center;
+}
+
+.back-button{
+  color: $dark-red;
+  margin : 2*$small-margin 0;
+  span{
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,188 @@
+
+<div class="bulk-activate">
+
+  <!-- Step 1: Categories -->
+  <div class="categories" *ngIf="currentStep === 1">
+    <div
+      class="category"
+      *ngFor="let category of categoryList"
+      (click)="onCategoryClick(category.id)"
+    >
+      <img
+        [defaultImage]="'/assets/images/ic_placeholder.jpg'"
+        [lazyLoad]="category.avatar"
+        [alt]="category.name"
+      />
+      <p>{{ category.name }}</p>
+    </div>
+  </div>
+
+  <!-- Back button -->
+  <p class="back-button" *ngIf="currentStep > 1">
+    <span (click)="backStep()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+      Back
+    </span>
+  </p>
+
+  <!-- Step 2: Products -->
+  <div class="products" *ngIf="currentStep === 2 && products">
+
+    <div *ngFor="let product of products">
+      <div class="product" (click)="selectProduct(product)">
+
+        <img
+          class="product-image"
+          [defaultImage]="'/assets/images/ic_placeholder.jpg'"
+          [lazyLoad]="product.image"
+          [alt]="product.title"
+        />
+
+        <div class="info">
+          <p class="title">
+            {{ product?.title }}
+
+            <span *ngIf="product.price_min == product.price_max">
+              {{ product?.currency_data?.symbol }}{{ product?.price_min }}
+            </span>
+          </p>
+
+          <div class="product-status">
+            <p
+              class="title"
+              *ngIf="product.price_ranges_ratio.length < 1"
+            >
+              No buying price found
+            </p>
+
+            <p
+              class="title"
+              *ngIf="product.price_ranges_ratio.length > 0"
+            >
+              <span *ngIf="product.price_min != product.price_max">
+                {{ product?.currency_data?.symbol }}{{ product?.price_min }}
+                -
+                {{ product?.currency_data?.symbol }}{{ product?.price_max }}
+              </span>
+
+              <span *ngIf="product.price_min == product.price_max">
+                {{ product?.currency_data?.symbol }}{{ product?.price_min }}
+              </span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="!isFinish" class="center">
+      <ion-button
+        type="button"
+        fill="solid"
+        (click)="showMore()"
+      >
+        Show More
+      </ion-button>
+    </div>
+
+  </div>
+
+  <!-- Step 3: Product details -->
+  <div
+    class="product-detail"
+    *ngIf="currentStep === 3 && selectedProduct"
+  >
+
+    <p class="title">{{ selectedProduct.title }}</p>
+
+    <div class="product-image">
+      <img
+        [src]="selectedProduct.image"
+        [alt]="selectedProduct.title"
+      />
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="activateProduct()">
+
+      <!-- Price -->
+      <div
+        class="price-form"
+        *ngIf="selectedProduct.card_type == 1"
+      >
+        <ion-input
+          [placeholder]="pricePlaceholder"
+          formControlName="price"
+          type="number"
+          inputmode="decimal"
+          *ngIf="selectedProduct.price_min != selectedProduct.price_max"
+          class="custom-input"
+        ></ion-input>
+
+        <p *ngIf="selectedProduct.price_min == selectedProduct.price_max">
+          {{ selectedProduct.currency_data?.symbol }}
+          {{ selectedProduct.price_min }}
+        </p>
+      </div>
+
+      <p class="price-error">{{ priceErrorText }}</p>
+
+      <!-- Quantity -->
+      <div class="quantity">
+        <ion-input
+          placeholder="Quantity"
+          formControlName="quantity"
+          type="number"
+          inputmode="numeric"
+          *ngIf="selectedProduct.card_type != 1"
+          class="custom-input"
+        ></ion-input>
+
+        <p *ngIf="selectedProduct.card_type == 1">
+          Quantity: {{ productQuantity }}
+        </p>
+      </div>
+
+      <p class="quantity-error">{{ quantityError }}</p>
+
+      <!-- Serial numbers -->
+      <div
+        class="serial-form"
+        *ngIf="selectedProduct.card_type == 1"
+      >
+        <ion-input
+          placeholder="From Serial"
+          formControlName="fromSerial"
+          type="text"
+          class="custom-input"
+        ></ion-input>
+      </div>
+
+      <div
+        class="serial-form"
+        *ngIf="selectedProduct.card_type == 1"
+      >
+        <ion-input
+          placeholder="To Serial"
+          formControlName="toSerial"
+          type="text"
+          class="custom-input"
+        ></ion-input>
+      </div>
+
+      <!-- Submit -->
+      <div class="button">
+        <ion-button
+          type="submit"
+          expand="block"
+          class="checkoutButton"
+          [class.diActive]="invalidInput"
+          [disabled]="invalidInput"
+        >
+          Submit
+        </ion-button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

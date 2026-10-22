@@ -1,0 +1,17 @@
+@import "variables";
+
+.products {
+  margin-top: $base-margin;
+}
+
+.back-button {
+  color: $dark-red;
+  margin: 2 * $small-margin 0;
+  span {
+    cursor: pointer;
+  }
+}
+.center {
+  text-align: center;
+  margin: 5px 0px;
+}

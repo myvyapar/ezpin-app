@@ -1,0 +1,15 @@
+<div class="tables">
+    <p class="table-title">Order Items</p>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let orderItem of data.orders">
+        <td>{{orderItem.product.title}} {{orderItem.product_percent_price?.title}} {{orderItem.product.currency_data.symbol}}{{orderItem.unit_price}}</td>
+        <td>{{orderItem.product.currency_data.symbol}}{{orderItem.seller_price}}</td>
+        <td>{{orderItem.item_count}}</td>
+      </tr>
+    </table>
+  </div>

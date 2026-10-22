@@ -1,0 +1,97 @@
+
+@import 'variables';
+
+.app-toolbar-header {
+  box-shadow: none;
+}
+
+.custom-toolbar {
+  --background: #{$nav-background};
+}
+
+.toolbar-container {
+  width: calc(100% - 32px);
+  max-width: 670px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.toolbar-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $base-padding 0;
+
+  .profile,
+  .menu {
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .profile {
+    left: 0;
+
+    .favorite-icon {
+      cursor: pointer;
+      width: 28px;
+      height: 32px;
+    }
+  }
+
+  .menu {
+    right: 0;
+    cursor: pointer;
+    gap: 9px;
+
+    .basket-icon {
+      width: 27px;
+    }
+
+    .flag {
+      width: 30px;
+      height: 19px;
+      margin-right: 0;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      width: 24px;
+      height: 24px;
+      background-color: $red;
+      text-align: center;
+      border-radius: 50%;
+
+      p {
+        margin: 0;
+        color: $white;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .wallet-icon {
+    margin-left: $base-margin;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-img {
+      width: 100px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .toolbar-row {
+    .logo ion-img {
+      width: 64px;
+    }
+  }
+}

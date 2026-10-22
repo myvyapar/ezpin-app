@@ -1,0 +1,8 @@
+<div class="single-activate">
+  <div class="form">
+    <input matInput placeholder="Enter Serial Number" [formControl]="serialNumber" maxlength="30">
+  </div>
+  <div class="active-button container">
+    <div class="button" [class.disable-button]="!isActiveButton" (click)="activateCard()" >ACTIVE</div>
+  </div>
+</div>

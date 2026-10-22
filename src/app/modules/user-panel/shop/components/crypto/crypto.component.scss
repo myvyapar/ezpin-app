@@ -1,0 +1,98 @@
+@import "variables";
+
+.crypto-price {
+  text-align: center;
+  color: $white-smoke;
+  font-size: $primary-title;
+  margin: $base-margin 0;
+}
+
+.price-form {
+  width: 100%;
+  margin: $base-margin auto;
+  padding: $small-padding 2 * $small-padding;
+  background-color: $dark-gray;
+  border-radius: $small-radius;
+
+  input {
+    width: 100%;
+    margin: 2 * $small-margin 0px;
+    font-size: $base-font;
+    background-color: inherit;
+    border: none;
+    color: $white;
+  }
+
+  ::placeholder {
+    color: $light-gray;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: $light-gray;
+  }
+
+  ::-ms-input-placeholder {
+    color: $light-gray;
+  }
+}
+
+.valid-price {
+  margin-bottom: $base-margin;
+  margin-top: $small-margin;
+
+  p {
+    margin: 0;
+    color: $white-smoke;
+  }
+}
+
+.hint {
+  color: $dark-red;
+}
+
+.commission-rate {
+  color: $light-blue;
+}
+
+.button {
+  margin-top: 2 * $small-margin;
+  cursor: pointer;
+
+  .finalizeButton,
+  .checkoutButton {
+    flex: 1;
+    text-align: center;
+    color: $white;
+    border-radius: $small-radius;
+    width: 100%;
+    background-color: $dark-red;
+  }
+
+  .finalizeButton {
+    background-color: $light-orange;
+  }
+}
+
+.order-list {
+  margin-top: $medium-margin;
+
+  p {
+    color: $white-smoke;
+  }
+
+  .order {
+    margin-top: $base-margin;
+    border-bottom: 1px solid $white-smoke;
+    padding-bottom: $base-padding;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.center {
+  text-align: center;
+  margin: 5px 0px;
+}

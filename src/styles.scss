@@ -1,0 +1,15 @@
+@import 'font';
+@import 'basic';
+
+
+body.recaptcha{
+    .grecaptcha-badge {
+      display: block !important;
+     }
+  } 
+  
+body.recaptcha-hide{
+    .grecaptcha-badge{
+      display: none !important;
+    }
+}

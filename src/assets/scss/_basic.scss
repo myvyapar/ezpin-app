@@ -1,0 +1,52 @@
+@import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'helvetica';
+  background-color: $light-black;
+}
+
+.full-with-dialog {
+  position: relative;
+  overflow: auto;
+}
+
+.description-dialog {
+  overflow: auto;
+
+  .mat-dialog-container {
+    background-color: $dark-gray;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  padding: 0px 15px;
+  position: relative;
+}
+
+
+.backdropBackground {
+  .mat-dialog-container {
+    background-color: $dark-gray;
+  }
+}
+
+
+.custom-bottom-sheet {
+  background-color: $black;
+}

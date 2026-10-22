@@ -1,0 +1,50 @@
+<div class="buy-product">
+  <div class="container-bottom-sheet">
+    <div class="product-count">
+      <div class="counter">
+        <img src="/assets/images/icons/minus.svg" *ngIf="!isAddedProduct" (click)="minus()" />
+        <p class="count">{{count}}</p>
+        <img src="/assets/images/icons/plus.svg" *ngIf="!isAddedProduct" (click)="plus()" />
+      </div>
+      <div class="form" *ngIf="data.hasRange">
+        <input [placeholder]="rangePlaceholder" [formControl]="priceRange" twoDigitDecimalNumber />
+      </div>
+      <p class="range-input" *ngIf="data.hasRange">Type an amount between
+        {{data.product.currency_data.symbol}}{{data.product.price_min}} and
+        {{data.product.currency_data.symbol}}{{data.product.price_max}}</p>
+      <p class="range-input" *ngIf="data.hasRange">{{inputMessage}}</p>
+    </div>
+
+    <p class="product-status" *ngIf="data.hasRange && (isShowStatus || data.product?.suggestions?.length == 0)">
+      {{data.priceStatus}}</p>
+    <p class="product-status" *ngIf="isShowStatus && !data.hasRange">{{data.product?.available_cards_text}}</p>
+
+    <div class="product-info">
+      <img defaultImage="/assets/images/ic_placeholder.jpg" [lazyLoad]="data.image" />
+      <div class="product-price">
+        <p *ngIf="data.price">
+          <span *ngIf="data.product.showing_price">{{data.product.showing_price?.showing_currency?.symbol}}</span>
+          <span *ngIf="!data.product.showing_price">{{data.currency}}</span>{{data.price |number: '1.0-2'}}
+        </p>
+        <p *ngIf="!data.price">{{data.product.currency_data.symbol}}{{data.product.price_min}} -
+          {{data.product.currency_data.symbol}}{{data.product.price_max}}
+        </p>
+        <p>{{data.name}} <span *ngIf="data.price">{{data.product.title}} {{data.currency}}{{data.product.price}} </span>
+        </p>
+      </div>
+    </div>
+    <div class="descriptions" *ngIf="productDescriptions.length > 0">
+      <button mat-raised-button (click)="openDescriptionDialog()">
+        Descriptions
+      </button>
+    </div>
+  </div>
+
+  <div class="button">
+    <div class="addButton">
+      <div class="checkoutButton" (click)="checkoutButton()">
+        Checkout
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="login-page">
+  <div class="container">
+    <div class="logo">
+      <img src="assets/images/ezpin_with_text.png" alt="Hi gift">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="!isNeedLoginMethod">
+      <ion-input
+        class="login-field"
+        fill="outline"
+        label="Username or Email"
+        labelPlacement="floating"
+        autocomplete="username"
+        formControlName="username"
+      ></ion-input>
+      <ion-input
+        class="login-field"
+        fill="outline"
+        label="Password"
+        labelPlacement="floating"
+        type="password"
+        autocomplete="current-password"
+        formControlName="password"
+      ></ion-input>
+      <ion-input
+        *ngIf="hasCode"
+        class="login-field"
+        fill="outline"
+        label="2-Factor verification code"
+        labelPlacement="floating"
+        formControlName="code"
+      ></ion-input>
+      <div class="server-picker" *ngIf="serverList?.length > 1">
+        <img *ngIf="selected?.image" [src]="selected.image" [alt]="selected.name">
+        <ion-select
+          [(ngModel)]="selected"
+          [ngModelOptions]="{ standalone: true }"
+          interface="popover"
+          aria-label="Server"
+        >
+          <ion-select-option *ngFor="let server of serverList" [value]="server">
+            {{ server.name }}
+          </ion-select-option>
+        </ion-select>
+      </div>
+      <div id="g-recaptcha"></div>
+      <ion-button class="submit-button" expand="block" type="submit">SIGN IN</ion-button>
+    </form>
+    <div *ngIf="isNeedLoginMethod && !isTwoFactorRequired" class="two-step-login">
+      <p>Please choose your two-step verification method.</p>
+      <div class="flex-col">
+        <ion-button expand="block" type="button" (click)="onSubmitStepTwo()" *ngIf="loginMethods.google_two_step">
+          <ion-icon slot="start" name="key-outline"></ion-icon>
+          2 Factor Authentication App
+        </ion-button>
+        <ion-button expand="block" type="button" (click)="onSubmitStepTwo(1)" *ngIf="loginMethods.email_two_step">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          Email
+        </ion-button>
+        <ion-button expand="block" type="button" (click)="onSubmitStepTwo(2)" *ngIf="loginMethods.phone_two_step">
+          <ion-icon slot="start" name="call-outline"></ion-icon>
+          Phone
+        </ion-button>
+      </div>
+    </div>
+    <form name="twoStepForm" [formGroup]="twoStepForm" *ngIf="isTwoFactorRequired">
+      <ion-button class="previous-btn" fill="clear" type="button" (click)="isTwoFactorRequired = false">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+      <p class="two-step-text">{{ responseMessage }}</p>
+      <ion-input
+        class="login-field"
+        fill="outline"
+        label="2-Factor verification code"
+        labelPlacement="floating"
+        formControlName="code"
+      ></ion-input>
+      <div *ngIf="method !== 3" class="resend-code">
+        <ion-button type="button" [disabled]="remainingTime.timer >= 1" (click)="resendCode()">
+          Resend
+        </ion-button>
+        <div class="remaining-time" *ngIf="remainingTime.timer > 1">
+          <div class="seconds">
+            <p>({{ remainingTime.minutes }}</p>
+            :
+            <p>{{ remainingTime.seconds }})</p>
+          </div>
+        </div>
+      </div>
+      <a *ngIf="method == 3" class="forgot-password" [routerLink]="['/auth', '2-factor', 'reset']">
+        Lost 2-Step Verification Code?
+      </a>
+      <ion-button
+        expand="block"
+        class="submit-button"
+        aria-label="LOGIN"
+        [disabled]="twoStepForm.invalid"
+        (click)="codeInject()"
+      >
+        LOGIN
+      </ion-button>
+    </form>
+    <div class="link">
+      <p>
+        Do not have an account?
+      </p>
+      <a href="https://panel.ezpaypin.com/login">Sign up here</a>
+    </div>
+    <div class="link">
+      <p>
+        Forget your password?
+      </p>
+      <p class="forget-password" (click)="openDialog()">Click here</p>
+    </div>
+  </div>
+</div>

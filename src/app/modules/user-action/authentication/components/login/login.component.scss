@@ -1,0 +1,170 @@
+@import "variables";
+@import "mixins";
+
+
+form, .two-step-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: $base-padding 0;
+}
+
+.logo {
+  text-align: center;
+  padding-top: $ms-padding;
+  padding-bottom: $base-padding;
+
+  img {
+    width: 150px;
+    height: auto;
+    @media (max-width: 768px) {
+      width: 120px;
+    }
+  }
+}
+
+.login-field {
+  width: 100%;
+  max-width: 304px;
+  margin: $small-margin 0;
+  --background: #{$dark-gray};
+  --border-color: #{$light-gray};
+  --border-radius: #{$small-radius};
+  --color: #{$white};
+  --highlight-color-focused: #{$light-gray};
+  --placeholder-color: #{$light-gray};
+
+  @media (min-width: 1024px) {
+    max-width: 350px;
+  }
+}
+
+.server-picker {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 304px;
+  min-height: 56px;
+  margin: $small-margin 0;
+  padding: 0 $base-padding;
+  border: 1px solid $light-gray;
+  border-radius: $small-radius;
+  background: $dark-gray;
+
+  img {
+    width: 25px;
+    height: 25px;
+    margin-right: $base-margin;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+
+  ion-select {
+    flex: 1;
+    color: $white;
+    --placeholder-color: #{$light-gray};
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 350px;
+  }
+}
+
+ion-button {
+  width: 100%;
+  max-width: 304px;
+  margin: $base-margin 0;
+  --background: #{$dark-red};
+  --border-radius: 0;
+  --color: #{$white};
+  font-size: 1rem;
+
+  @media (min-width: 1024px) {
+    max-width: 350px;
+  }
+}
+
+.submit-button {
+  margin-top: $base-margin;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+
+  p {
+    color: $light-gray;
+  }
+
+  a,
+  .forget-password {
+    cursor: pointer;
+    color: $red;
+    margin-left: $small-margin;
+    text-decoration: none;
+  }
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+  ion-button {
+    margin: 10px 0;
+    max-width: 350px;
+    text-align: left;
+  }
+}
+
+.two-step-login {
+  p {
+    color: $light-gray;;
+  }
+}
+
+.previous-btn {
+  align-self: flex-start;
+  width: auto;
+  max-width: none;
+  margin: 1rem 0;
+  --background: transparent;
+  --color: #{$red};
+}
+
+.remaining-time {
+  display: flex;
+  align-items: center;
+  color: $light-gray;
+  .seconds {
+    display: flex;
+    align-items: center;
+    margin: 0 2 * 4px;
+  }
+}
+
+.resend-code {
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin: 5px 0px;
+
+  ion-button {
+    width: 100px;
+    max-width: 100px;
+  }
+}
+
+.forgot-password {
+  color: $red;
+}
+
+.two-step-text {
+  max-width: 350px;
+  width: 100%;
+  color: $light-gray;
+}

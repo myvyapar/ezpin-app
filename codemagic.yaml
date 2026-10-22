@@ -1,0 +1,78 @@
+workflows:
+  ios-build:
+    name: iOS Testing IPA (MyApp.ipa)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      node: 22
+      xcode: latest
+    scripts:
+      - name: Install npm dependencies
+        script: |
+          npm install --legacy-peer-deps
+      - name: Build Angular production web assets
+        script: |
+          npm run build:prod
+      - name: Sync Capacitor iOS
+        script: |
+          npx cap sync ios
+      - name: Compile and Package MyApp.ipa
+        script: |
+          cd ios/App
+          # If a provisioning profile is configured in Codemagic UI, sign it; otherwise package for Sideloadly / Ad-Hoc
+          if [ -n "$CM_PROVISIONING_PROFILE" ]; then
+            xcode-project use-profiles
+            xcodebuild clean archive \
+              -project App.xcodeproj \
+              -scheme App \
+              -configuration Release \
+              -archivePath "$CM_BUILD_DIR/App.xcarchive"
+            xcodebuild -exportArchive \
+              -archivePath "$CM_BUILD_DIR/App.xcarchive" \
+              -exportPath "$CM_BUILD_DIR/build/ipa" \
+              -exportOptionsPlist exportOptions.plist
+            mv "$CM_BUILD_DIR/build/ipa"/*.ipa "$CM_BUILD_DIR/build/ipa/MyApp.ipa"
+          else
+            xcodebuild clean archive \
+              -project App.xcodeproj \
+              -scheme App \
+              -configuration Release \
+              -destination "generic/platform=iOS" \
+              -archivePath "$CM_BUILD_DIR/App.xcarchive" \
+              CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
+            mkdir -p "$CM_BUILD_DIR/build/ipa/Payload"
+            cp -R "$CM_BUILD_DIR/App.xcarchive/Products/Applications/App.app" "$CM_BUILD_DIR/build/ipa/Payload/"
+            cd "$CM_BUILD_DIR/build/ipa"
+            zip -r MyApp.ipa Payload
+          fi
+    artifacts:
+      - build/ipa/MyApp.ipa
+
+  android-build:
+    name: Android Testing APK (MyApp.apk)
+    max_build_duration: 30
+    instance_type: mac_mini_m2
+    environment:
+      node: 22
+      java: 17
+    scripts:
+      - name: Install npm dependencies
+        script: |
+          npm install --legacy-peer-deps
+      - name: Build Angular production web assets
+        script: |
+          npm run build:prod
+      - name: Sync Capacitor Android
+        script: |
+          npx cap sync android
+      - name: Build Signed Debug APK
+        script: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+          mkdir -p "$CM_BUILD_DIR/build/apk"
+          cp app/build/outputs/apk/debug/app-debug.apk "$CM_BUILD_DIR/build/apk/MyApp.apk"
+    artifacts:
+      - build/apk/MyApp.apk

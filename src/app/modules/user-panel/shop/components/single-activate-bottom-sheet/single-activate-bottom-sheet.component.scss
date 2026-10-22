@@ -1,0 +1,126 @@
+@import 'variables';
+
+::ng-deep {
+  .mat-bottom-sheet-container {
+    background-color: $light-black;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding: 0;
+  }
+}
+
+.product-info {
+
+  .center-detail {
+    text-align: center;
+    margin-top: $base-margin;
+    color: $white;
+
+    .product-name {
+      margin: 0;
+    }
+  }
+
+  img {
+    width: 120px;
+    border-radius: $small-radius;
+  }
+
+  .price-info {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      margin-right: $small-margin;
+      color: $light-gray;
+    }
+
+    .description {
+      color: $white;
+    }
+  }
+}
+
+.button {
+  margin-top: 2*$small-margin;
+  cursor: pointer;
+  border-top: 1px solid $white;
+
+  .addButton {
+    display: flex;
+
+    .checkoutButton,
+    .continueButton {
+      flex: 1;
+      text-align: center;
+      color: $white;
+      padding: $base-padding 2*$small-padding;
+    }
+
+    .checkoutButton {
+      background-color: $dark-red;
+    }
+
+    .diActive {
+      background-color: $light-gray;
+    }
+
+    .continueButton {
+      background-color: $dark-gray;
+    }
+  }
+}
+
+
+.multi-price {
+  p {
+    color: $white;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .col-3 {
+      width: 33.3%;
+
+      .content {
+        margin: $small-margin;
+        text-align: center;
+        padding: $small-padding;
+        background-color: $dark-red;
+        color: $white;
+        border-radius: $small-radius;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .or {
+    color: $red;
+    text-align: center;
+    margin-top: 2*$small-margin;
+  }
+
+  .form {
+    margin: 2*$small-margin 0;
+    padding: 2*$small-padding;
+    background-color: $dark-gray;
+    border-radius: $small-radius;
+
+    input {
+      width: 100%;
+      font-size: 16px;
+      background-color: inherit;
+      border: none;
+      color: $white;
+    }
+  }
+}
+
+.no-price-found {
+  background-color: $dark-red;
+  color: $white;
+  text-align: center;
+  padding: $base-padding 0;
+}

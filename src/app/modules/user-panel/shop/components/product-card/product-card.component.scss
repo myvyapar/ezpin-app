@@ -1,0 +1,167 @@
+@import 'variables';
+
+.product {
+  display: flex;
+  background-color: #f6f6f6;
+  padding: $base-padding;
+  border-radius: $small-radius;
+  margin-top: $base-margin;
+
+  @media (max-width: 568px) {
+    margin-top: $small-margin;
+    padding: $small-padding;
+  }
+
+  .product-image {
+    width: 150px;
+    height: 100%;
+    border-radius: $small-radius;
+
+    @media (max-width: 568px) {
+      width: 120px;
+    }
+
+    @media (max-width: 468px) {
+      width: 100px;
+    }
+  }
+
+  .info {
+    flex-grow: 1;
+    padding: 0 $base-padding;
+
+    .product-name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        min-width: 40%;
+
+        &:first-child {
+          margin-right: 2*$small-margin;
+        }
+
+        &:last-child {
+          text-align: end;
+        }
+      }
+    }
+
+    p {
+      color: $dark-gray;
+      margin: 0;
+    }
+
+    .title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .text {
+      color: $red;
+    }
+
+    .activation-fee {
+      color: $black;
+      font-size: 12px;
+      margin-top: $small-margin;
+
+      @media (max-width: 468px) {
+        font-size: 10px;
+        line-height: 14px;
+      }
+    }
+
+    @media (max-width: 568px) {
+      font-size: 12px;
+    }
+
+    .product-with-range {
+
+      .discount-over,
+      .title,
+      .text {
+        margin-top: $base-margin;
+      }
+
+      p,
+      .discount-over {
+        min-width: 40%;
+      }
+
+      .text-error{
+        text-align: end;
+        color: $red;
+      }
+
+      .discount-over {
+        margin-right: $small-margin;
+      }
+
+      .over {
+        color: $red;
+      }
+
+      .discount {
+        color: $light-blue;
+      }
+    }
+
+    .product-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        width: 26px;
+        height: 100%;
+        cursor: pointer;
+
+        @media (max-width: 568px) {
+          width: 22px;
+          height: 32px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes singleblink {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+.ng-lazyloading {
+  animation-name: blink;
+  animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.ng-lazyloaded {
+  animation-name: singleblink;
+  animation-duration: 1s;
+  animation-delay: 0s !important;
+}

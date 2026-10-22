@@ -1,0 +1,42 @@
+@import 'variables';
+
+.menu {
+    margin: $base-margin 0;
+
+    .user-info {
+        text-align: center;
+
+        .user-profile {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+        }
+
+        .user-name {
+            color: $white;
+            margin-top: $base-margin;
+        }
+    }
+
+
+    .menu-links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: $base-margin;
+        padding: 2*$small-padding $base-padding;
+        background-color: $light-gray;
+        color: $white;
+        border-radius: $small-radius;
+        cursor: pointer;
+
+        p {
+            margin: 0;
+        }
+
+        img {
+            width: 32px;
+            margin-right: $base-margin;
+        }
+    }
+}

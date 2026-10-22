@@ -1,0 +1,25 @@
+@import 'variables';
+
+::ng-deep {
+  .mat-tab-labels {
+    background-color: $dark-red;
+  }
+
+  .mat-tab-label {
+    width: 50%;
+    opacity: 1 !important;
+    color: $white;
+  }
+
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $white;
+  }
+}
+
+.tab-container{
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  padding: 0px;
+  position: relative;
+}

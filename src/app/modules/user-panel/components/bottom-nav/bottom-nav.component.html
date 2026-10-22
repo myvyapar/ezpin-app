@@ -1,0 +1,30 @@
+
+<div class="bottom-nav" [class.notShow]="isProfile">
+  <div class="container">
+    <ion-tab-bar class="nav-list">
+
+      <ion-tab-button
+        *ngFor="let item of navItems"
+        [routerLink]="item.link || null"
+        [class.not-selected]="activeItem !== item.name"
+        [class.egift-item]="item.name === 'eGift'"
+        [class.wishlist-item]="item.name === 'Wishlist'"
+        [disabled]="!item.link"
+        [tab]="item.name"
+        layout="icon-top">
+
+        <div class="item">
+          <img
+            [src]="item.imageUrl"
+            [class.wishlist-icon]="item.name === 'Wishlist'"
+            [alt]="item.name"
+          />
+
+          <p>{{ item.name }}</p>
+        </div>
+
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </div>
+</div>

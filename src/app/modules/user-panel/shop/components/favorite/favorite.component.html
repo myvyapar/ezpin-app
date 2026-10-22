@@ -1,0 +1,10 @@
+<div class="favorite">
+  <div class="container">
+    <p class="back-button"><span (click)="backStep()">Back</span></p>
+    <div class="products">
+      <div *ngFor="let product of products">
+        <product-card [category]="product" [isFavorite]="true"></product-card>
+      </div>
+    </div>
+  </div>
+</div>

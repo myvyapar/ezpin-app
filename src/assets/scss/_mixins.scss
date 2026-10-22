@@ -1,0 +1,105 @@
+@import 'variables';
+
+@mixin form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: $base-padding 0;
+
+  mat-form-field {
+    width: 100%;
+    max-width: 304px;
+    margin: $small-margin 0px;
+    font-size: $primary-description;
+
+    @media (min-width: 1024px) {
+      max-width: 350px;
+    }
+  }
+
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+      background-color: $dark-gray;
+      border-radius: $small-radius;
+
+    }
+
+    .mat-form-field-appearance-outline .mat-select-arrow-wrapper{
+      transform: translateY(0);
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+      color: $light-gray;
+    }
+
+    .mat-select-value-text {
+      color: $white;
+    }
+
+    .mat-select-arrow,
+    .mat-form-field-empty.mat-form-field-label,
+    .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+    .mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,
+    .mat-input-element,
+    .mat-form-field.mat-focused .mat-form-field-label {
+      color: $light-gray;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: $small-padding;
+    }
+
+    mat-option .mat-option .mat-focus-indicator .mat-option-text {
+      display: flex !important;
+      align-items: center;
+
+      img {
+        width: 30px;
+      }
+    }
+  }
+
+  ::placeholder {
+    color: $light-gray;
+    opacity: 1;
+  }
+
+
+
+
+  button {
+    padding: 2*$small-padding;
+    width: 100%;
+    max-width: 304px;
+    margin: $base-margin 0;
+    font-size: 1rem;
+    border-radius: 0;
+    background-color: $light-gray;
+
+    @media (min-width: 1024px) {
+      max-width: 350px;
+    }
+  }
+
+  ::ng-deep {
+    .mat-raised-button:not([class*="mat-elevation-z"]) {
+      box-shadow: none;
+    }
+  }
+}
+
+
+@mixin simple-button {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid $orange;
+  padding: $base-padding;
+  background: white;
+  border-radius: $small-radius;
+  color: $orange;
+  font-family: $regular-font;
+  font-size: 1rem;
+  cursor: pointer;
+}

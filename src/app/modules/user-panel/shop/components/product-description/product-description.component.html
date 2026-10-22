@@ -1,0 +1,16 @@
+<div class="descriptions" mat-dialog-content>
+  <mat-expansion-panel *ngFor="let description of data?.descriptions">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{description.title}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <p class="description" *ngIf="description.type != 'image' || description.type != video"
+        [innerHtml]="description.description">
+      </p>
+      <img class="description description-image" *ngIf="description.type == 'image'" [src]="description.description" />
+    </ng-template>
+
+  </mat-expansion-panel>
+</div>

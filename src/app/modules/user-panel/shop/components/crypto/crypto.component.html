@@ -1,0 +1,78 @@
+<div class="crypto-page" *ngIf="isActiveCrypto">
+  <div class="container">
+    <div class="main-crypto" *ngIf="currentStep == 1">
+      <p class="crypto-price">
+        1BTC = {{ cryptoCurrency?.allowed_currencies[0].currency.symbol
+        }}{{ cryptoCurrency?.allowed_currencies[0].price }}
+      </p>
+      <div class="price-form">
+        <input
+          placeholder="Amount($)"
+          [formControl]="cryptoAmount"
+          twoDigitDecimalNumber
+        />
+      </div>
+      <div class="valid-price">
+        <p>
+          Minimum: {{ cryptoCurrency?.allowed_currencies[0].currency.symbol
+          }}{{ cryptoCurrency?.allowed_currencies[0].min_amount }}
+        </p>
+        <p>
+          Maximum: {{ cryptoCurrency?.allowed_currencies[0].currency.symbol
+          }}{{ cryptoCurrency?.allowed_currencies[0].max_amount }}
+        </p>
+      </div>
+      <p class="hint">
+        Please note since the exchange rates are not fixed, the rated are
+        computed after your order is created.
+      </p>
+      <p class="commission-rate">
+        Commission Rate : %{{ cryptoCommission?.percent }}
+      </p>
+      <div class="button" (click)="createOrder()">
+        <button mat-raised-button class="checkoutButton">Create Order</button>
+      </div>
+      <div class="order-list">
+        <div class="order" *ngFor="let order of cryptoOrderList">
+          <div class="row">
+            <p>Order Id: C{{ order.id }}</p>
+            <p>Status: {{ order.status_text }}</p>
+          </div>
+          <p>Amount: {{ order.currency_data?.symbol }}{{ order.price }}</p>
+          <p>Crypto Amount: {{ order.crypto_amount }}</p>
+          <p>
+            {{
+              (
+                order.created_time
+                | date : "MMMM d, y, h:mm:ss a z"
+                | convertTimezone
+              ).date
+            }}
+            {{
+              (
+                order.created_time
+                | date : "MMMM d, y, h:mm:ss a z"
+                | convertTimezone
+              ).time
+            }}
+          </p>
+          <div class="button" (click)="finalizeOrder(order)">
+            <button mat-raised-button class="finalizeButton">
+              Finalize Order
+            </button>
+          </div>
+        </div>
+        <div *ngIf="!this.isFinish" class="center">
+          <button mat-raised-button (click)="showMore()">Show More</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="order" *ngIf="currentStep == 2">
+      <crypto-finalize
+        [order]="selectedOrder"
+        (reduceStep)="onReduceStep($event)"
+      ></crypto-finalize>
+    </div>
+  </div>
+</div>

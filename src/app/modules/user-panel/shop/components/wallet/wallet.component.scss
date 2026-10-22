@@ -1,0 +1,89 @@
+@import "variables";
+
+.wallet-toolbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: $light-black;
+  z-index: 10;
+
+  .back-button {
+    color: $dark-red;
+    padding: 2 * $small-margin 0;
+
+    span {
+      cursor: pointer;
+    }
+  }
+
+  .currency-title {
+    text-align: center;
+    color: $white-smoke;
+  }
+}
+
+.balances {
+  .title {
+    color: $white;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .balance-card {
+    text-align: center;
+    background-color: $light-white;
+    border-radius: $small-radius;
+    padding: $base-padding;
+    margin-top: $base-margin;
+    cursor: pointer;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.currency-details {
+  .currency-detail {
+    background-color: $light-white;
+    border-radius: $small-radius;
+    padding: 2 * $small-padding;
+    margin-top: $base-margin;
+
+    .sign-detail {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: $small-margin;
+
+      img {
+        width: 20px;
+        height: 100%;
+        margin-right: 2 * $small-margin;
+      }
+    }
+
+    .wallet-type {
+      color: $green;
+    }
+
+    .less-amount {
+      color: $dark-red;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .help-button {
+      background-color: $orange;
+      margin-top: 2 * $small-margin;
+      color: $white;
+      width: 100%;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+  margin: 5px 0px;
+}

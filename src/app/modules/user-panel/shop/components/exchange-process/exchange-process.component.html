@@ -1,0 +1,30 @@
+<div class="exchange-dialog">
+  <div class="first-step-confirm" *ngIf="!showExchangeDetail">
+    <p class="title">Insufficient Balance</p>
+    <p class="description">
+      Do you want to exchange from other currencies?
+    </p>
+    <div class="confirm" (click)="submitExchange()">
+      Confirm
+    </div>
+    <div class="cancel" (click)="cancel()">
+      Cancel
+    </div>
+  </div>
+  <div class="final-step-confirm" *ngIf="showExchangeDetail">
+    <p>Exchange</p>
+    <p> Exchange from {{selectedRange.from_currency_data.country}}
+      {{selectedRange.from_currency_data.currency}}({{selectedRange.from_currency_data.symbol}}) To
+      {{selectedRange.to_currency_data.country}}
+      {{selectedRange.to_currency_data.currency}}({{selectedRange.to_currency_data.symbol}}) </p>
+    <p>Exchange Rate: {{selectedRange.rate}}</p>
+    <p>Amount: {{selectedRange.from_currency_data.symbol}}{{amount}}</p>
+    <p>Receive: {{data.currency}}{{data.total  |number: '1.0-2'}}</p>
+    <div class="confirm" (click)="confirmExchange()">
+      Exchange
+    </div>
+    <div class="cancel" (click)="cancel()">
+      Cancel
+    </div>
+  </div>
+</div>

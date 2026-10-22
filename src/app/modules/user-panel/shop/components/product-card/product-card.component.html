@@ -1,0 +1,53 @@
+<div *ngFor="let product of category?.suggestions ; let categoryIndex = index">
+  <div class="product" *ngIf="(isFavorite && product.is_favorite) || !isFavorite"
+    (click)="selectProduct(product,!hasRange)">
+    <img class="product-image" defaultImage="/assets/images/ic_placeholder.jpg" [lazyLoad]="category?.image" />
+    <div class="info">
+      <p class="title"> {{category?.title}} {{product?.title}} {{category?.currency_data?.symbol}}{{product?.price}}
+      </p>
+      <div class="product-status">
+        <p class="title" *ngIf="showBuyingPrice">
+          {{category?.currency_data?.symbol}}{{calcBuyingPrice(category?.price_ranges_ratio,product)}}
+        </p>
+        <p class="title" *ngIf="!showBuyingPrice && product?.showing_price?.price">
+          {{product?.showing_price?.showing_currency?.symbol}}{{product?.showing_price?.price}} </p>
+        <p class="title" *ngIf="!showBuyingPrice && !product?.showing_price?.price">
+          {{category?.currency_data?.symbol}}{{product?.price}}</p>
+        <img src="/assets/images/icons/not-added.svg" *ngIf="!product?.is_favorite"
+          (click)="addFavorite(product.id,categoryIndex);$event.stopPropagation()" />
+        <img src="/assets/images/icons/added-favorite.svg" *ngIf="product?.is_favorite"
+          (click)="deleteFavorite(product.id,categoryIndex);$event.stopPropagation()" />
+      </div>
+      <p class="text" *ngIf="!findRatio(category?.price_ranges_ratio,product)">
+        No buying price found
+      </p>
+      <p class="text">{{productStatus(category?.price_ranges_ratio,product)}}</p>
+      <p class="activation-fee" *ngIf="showBuyingPrice">{{activationFee(category,product)}}</p>
+    </div>
+  </div>
+</div>
+<div class="product" *ngIf="!category?.hide_range && !isFavorite" (click)="selectProduct(null,hasRange)">
+  <img class="product-image" defaultImage="/assets/images/ic_placeholder.jpg" [lazyLoad]="category?.image" />
+  <div class="info">
+    <div class="product-name">
+      <p class="title"> {{category?.title}}</p>
+      <p class="title">
+        {{category?.currency_data?.symbol}}{{category?.price_min}} -
+        {{category?.currency_data?.symbol}}{{category?.price_max}} </p>
+    </div>
+    <div class="product-status product-with-range">
+      <div class="discount-over"
+        *ngIf="((!category?.price_fix) || (category?.price_fix == 0)) && category?.price_ranges_ratio?.length > 0 ">
+        <p class="over" *ngIf="calcDiscountOver(category)?.ratio > 1 && showBuyingPrice">Over:
+          {{calcDiscountOver(category)?.overDiscountPercent}}% </p>
+        <p class="discount" *ngIf="calcDiscountOver(category)?.ratio < 1">Discount:
+          {{calcDiscountOver(category)?.overDiscountPercent}}% </p>
+      </div>
+      <p class="title text-error" *ngIf="category?.price_ranges_ratio?.length<1">No buying price found </p>
+      <p class="text text-error" *ngIf="!category?.pre_order && category?.price_ranges_ratio?.length > 0">Pre-order is
+        not
+        available</p>
+    </div>
+    <p class="activation-fee" *ngIf="showBuyingPrice">{{activationFeeWithRange(category)}}</p>
+  </div>
+</div>

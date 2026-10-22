@@ -1,0 +1,310 @@
+<div class="orders">
+  <div class="container">
+    <div class="tabs" [class.notShow]="isHiddenTabs">
+      <div
+        class="choice-tab"
+        *ngIf="hasEGiftPermission"
+        [class.selected-button]="currentStep == 'eGift'"
+        (click)="selectTab('eGift')"
+      >
+        <p>eGift</p>
+      </div>
+      <div
+        class="choice-tab"
+        *ngIf="hasPhysicalPermission"
+        [class.selected-button]="currentStep == 'physical'"
+        (click)="selectTab('physical')"
+      >
+        <p>Physical</p>
+      </div>
+      <div
+        class="choice-tab"
+        *ngIf="hasCryptoPermission"
+        [class.selected-button]="currentStep == 'crypto'"
+        (click)="selectTab('crypto')"
+      >
+        <p>Crypto</p>
+      </div>
+    </div>
+
+    <div
+      class="empty-field"
+      *ngIf="
+        (currentStep == 'eGift' && eGiftScrollOption.isEmpty) ||
+        (currentStep == 'physical' && physicalScrollOption.isEmpty) ||
+        (currentStep == 'crypto' && cryptoScrollOption.isEmpty)
+      "
+    >
+      <p>We couldn't find any thing!</p>
+    </div>
+    <div
+      class="eGift-orders"
+      *ngIf="currentStep == 'eGift' && eGiftOrders && hasEGiftPermission"
+    >
+      <div class="eGift" *ngFor="let eGift of eGiftOrders">
+        <p>Order ID: D{{ eGift.id }}</p>
+        <p>
+          Total price: {{ eGift.order_items[0]?.product?.currency_data?.symbol
+          }}{{ eGift.order_price }}
+        </p>
+        <p *ngIf="eGift.email && !eGift.phone && !eGift.whatsapp">
+          Email: {{ eGift.email }}
+        </p>
+        <p *ngIf="!eGift.email && eGift.phone && !eGift.whatsapp">
+          Phone: {{ eGift.phone }}
+        </p>
+        <p *ngIf="!eGift.email && !eGift.phone && eGift.whatsapp">
+          WhatsApp: {{ eGift.whatsapp }}
+        </p>
+        <p *ngIf="!eGift.email && !eGift.phone && !eGift.whatsapp">Printed</p>
+        <p>
+          Time:
+          {{
+            (
+              eGift.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).date
+          }}
+          {{
+            (
+              eGift.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).time
+          }}
+        </p>
+        <div class="group-buttons">
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="eGift.status != 1"
+            (click)="resendEGift(eGift)"
+          >
+            <span *ngIf="eGift.status != 1">Pending</span>
+            <span *ngIf="eGift.status == 1">Resend</span>
+          </button>
+          <button
+            mat-raised-button
+            class="detail-button"
+            (click)="onDetailSelect(eGift)"
+          >
+            Details
+          </button>
+        </div>
+        <button
+          mat-raised-button
+          class="help-button"
+          (click)="helpButton(eGift.id)"
+        >
+          Help
+        </button>
+      </div>
+      <div *ngIf="!this.eGiftScrollOption.isFinish" class="center">
+        <button mat-raised-button (click)="onScrollEGifts()">Show More</button>
+      </div>
+    </div>
+
+    <div
+      class="eGift-detail"
+      *ngIf="currentStep == 'detail-eGift' && detailEGift"
+    >
+      <p class="back-button"><span (click)="backStep()">Back</span></p>
+      <p class="title">Order Details</p>
+      <p>Order ID: D{{ detailEGift.id }}</p>
+      <p
+        *ngIf="detailEGift.email && !detailEGift.phone && !detailEGift.whatsapp"
+      >
+        Email: {{ detailEGift.email }}
+      </p>
+      <p
+        *ngIf="!detailEGift.email && detailEGift.phone && !detailEGift.whatsapp"
+      >
+        Phone: {{ detailEGift.phone }}
+      </p>
+      <p
+        *ngIf="!detailEGift.email && !detailEGift.phone && detailEGift.whatsapp"
+      >
+        WhatsApp: {{ detailEGift.whatsapp }}
+      </p>
+      <p
+        *ngIf="
+          !detailEGift.email && !detailEGift.phone && !detailEGift.whatsapp
+        "
+      >
+        Printed
+      </p>
+      <p>
+        Time:
+        {{
+          (
+            detailEGift.created_time
+            | date : "MMMM d, y, h:mm:ss a z"
+            | convertTimezone
+          ).date
+        }}
+        {{
+          (
+            detailEGift.created_time
+            | date : "MMMM d, y, h:mm:ss a z"
+            | convertTimezone
+          ).time
+        }}
+      </p>
+      <div class="tables">
+        <p class="table-title">Order Details</p>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th>Qty</th>
+            <th>Total Price</th>
+          </tr>
+          <tr *ngFor="let orderItem of detailEGift.order_items">
+            <td>
+              {{ orderItem.product.title }}
+              {{ orderItem.product_percent_price?.title }}
+              {{ orderItem.product.currency_data.symbol
+              }}{{ orderItem.unit_price }}
+            </td>
+            <td>
+              {{ orderItem.product.currency_data.symbol
+              }}{{ orderItem.seller_price }}
+            </td>
+            <td>{{ orderItem.item_count }}</td>
+            <td>
+              {{ orderItem.product.currency_data.symbol
+              }}{{
+                calcTotalPrice(orderItem.seller_price, orderItem.item_count)
+                  | number : "1.0-2"
+              }}
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="detail-eGift-order">
+        <div class="container">
+          <p>
+            Total price:
+            {{ detailEGift.order_items[0].product.currency_data.symbol
+            }}{{ detailEGift.order_price }}
+          </p>
+          <button
+            mat-raised-button
+            [disabled]="detailEGift.status != 1"
+            (click)="resendEGift(detailEGift)"
+          >
+            Resend
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="physical-orders"
+      *ngIf="
+        currentStep == 'physical' && physicalOrders && hasPhysicalPermission
+      "
+    >
+      <div class="physical" *ngFor="let physical of physicalOrders">
+        <p>Order ID: P{{ physical.id }}</p>
+        <p>Serial: {{ physical.serial }}</p>
+        <p>
+          Product: {{ physical.product.title }}
+          <span *ngIf="physical.product.card_type == 1">
+            {{ physical.product.currency_data.symbol
+            }}{{ physical.amount }}</span
+          >
+        </p>
+        <p class="status" [class.failed]="physical.status_text == 'Failed'">
+          Status: {{ physical.status_text }}
+        </p>
+        <p>
+          Time:
+          {{
+            (
+              physical.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).date
+          }}
+          {{
+            (
+              physical.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).time
+          }}
+        </p>
+        <p>
+          Price: {{ physical.product.currency_data.symbol
+          }}{{ physical.amount }}
+        </p>
+        <button
+          mat-raised-button
+          class="help-button"
+          (click)="helpButton(physical.id)"
+        >
+          Help
+        </button>
+      </div>
+      <div *ngIf="!this.physicalScrollOption.isFinish" class="center">
+        <button mat-raised-button (click)="onScrollPhysical()">
+          Show More
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="crypto-orders"
+      *ngIf="currentStep == 'crypto' && cryptoOrders && hasCryptoPermission"
+    >
+      <div class="crypto" *ngFor="let crypto of cryptoOrders">
+        <div class="crypto-row">
+          <p>Order ID: C{{ crypto.id }}</p>
+          <p>Status: {{ crypto.status_text }}</p>
+        </div>
+        <p>Amount: {{ crypto.currency_data.symbol }}{{ crypto.price }}</p>
+        <p>Crypto Amount: {{ crypto.crypto_amount }}</p>
+        <p>
+          {{
+            (
+              crypto.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).date
+          }}
+          {{
+            (
+              crypto.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).time
+          }}
+        </p>
+
+        <div class="group-buttons">
+          <button
+            mat-raised-button
+            class="resend-button"
+            color="primary"
+            *ngIf="!crypto?.crypto_wallet && crypto.status == 1"
+            (click)="resendCrypto(crypto)"
+          >
+            <span>Resend</span>
+          </button>
+          <button
+            mat-raised-button
+            class="help-crypto-btn"
+            (click)="helpButton(crypto.id)"
+          >
+            Help
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!this.cryptoScrollOption.isFinish" class="center">
+        <button mat-raised-button (click)="onScrollCrypto()">Show More</button>
+      </div>
+    </div>
+  </div>
+</div>

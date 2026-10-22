@@ -1,0 +1,16 @@
+<div class="panel">
+  <ion-header *ngIf="!hiddenToolbar" class="app-header">
+    <app-toolbar
+      [isEGiftPage]="isEGiftPage"
+      [isMenuPage]="isMenuPage">
+    </app-toolbar>
+  </ion-header>
+
+    <div class="router-panel" [class.custom-page]="customPage">
+      <router-outlet></router-outlet>
+    </div>
+
+  <ion-footer class="app-footer">
+    <bottom-nav></bottom-nav>
+  </ion-footer>
+</div>

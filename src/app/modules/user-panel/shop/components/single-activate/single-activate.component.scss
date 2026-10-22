@@ -1,0 +1,61 @@
+@import 'variables';
+
+.single-activate {
+  position: relative;
+}
+
+.form {
+  width: 100%;
+  margin: $medium-margin auto;
+  padding: $base-padding 2*$small-padding;
+  background-color: $dark-gray;
+  border-radius: $small-radius;
+
+
+  input {
+    width: 100%;
+    margin: $small-margin 0px;
+    font-size: $base-font;
+    background-color: inherit;
+    border: none;
+    color: $white;
+    text-align: center;
+  }
+
+  ::placeholder {
+    color: $light-gray;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: $light-gray;
+  }
+
+  ::-ms-input-placeholder {
+    color: $light-gray;
+  }
+}
+
+.active-button {
+  position: fixed;
+  bottom: $distance-bottom-nav;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  .button {
+    width: 100%;
+    padding: $base-padding 2*$small-padding;
+    text-align: center;
+    background-color: $dark-red;
+    color: $white;
+    cursor: pointer;
+  }
+
+  .disable-button {
+    background-color: $light-gray;
+    color: $white-smoke;
+    cursor: context-menu;
+  }
+
+}

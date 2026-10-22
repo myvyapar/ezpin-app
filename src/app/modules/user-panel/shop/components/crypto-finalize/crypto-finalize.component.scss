@@ -1,0 +1,125 @@
+@import 'variables';
+
+.blue-title {
+  color: $light-blue;
+  font-size: $primary-title;
+  margin-top: $base-margin;
+}
+
+.timer {
+  color: $dark-red;
+  font-size: $primary-title;
+}
+
+.hint {
+  color: $white-smoke;
+}
+
+.table-info {
+  margin: $base-margin 0;
+
+  table,
+  th,
+  td {
+    border: 1px solid $white-smoke;
+    border-collapse: collapse;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td {
+    width: 50%;
+    padding: 2px $small-padding;
+    color: $white-smoke;
+  }
+}
+
+.select-pin {
+  margin-top: $base-margin;
+}
+
+.select-pay {
+  display: flex;
+  justify-content: space-between;
+
+  .choice,
+  .choice-pin {
+    border: 1px solid $dark-red;
+    border-radius: $small-radius;
+    padding: $small-padding;
+    text-align: center;
+    cursor: pointer;
+
+    p {
+      color: $white;
+      margin: 0;
+    }
+  }
+
+  .choice {
+    width: 48%;
+  }
+
+  .choice-pin {
+    width: 31%;
+  }
+}
+
+.selected-button {
+  background-color: $dark-red;
+}
+
+.form {
+  width: 100%;
+  margin: $base-margin auto;
+  padding: 2*$small-padding;
+  background-color: $dark-gray;
+  border-radius: $small-radius;
+
+
+  input {
+    width: 100%;
+    margin: $small-margin 0px;
+    font-size: $base-font;
+    background-color: inherit;
+    border: none;
+    color: $white;
+  }
+
+  ::placeholder {
+    color: $light-gray;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: $light-gray;
+  }
+
+  ::-ms-input-placeholder {
+    color: $light-gray;
+  }
+}
+
+.button {
+  margin-top: 2*$small-margin;
+  cursor: pointer;
+
+  .checkoutButton {
+    flex: 1;
+    text-align: center;
+    color: $white;
+    width: 100%;
+    background-color: $dark-red;
+  }
+
+}
+
+.back-button{
+  color: $dark-red;
+  margin : 2*$small-margin 0;
+  span{
+    cursor: pointer;
+  }
+}

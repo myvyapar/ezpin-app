@@ -1,0 +1,117 @@
+<div class="wallet">
+  <div class="container">
+    <div class="wallet-toolbar">
+      <p class="back-button"><span (click)="backStep()">Back</span></p>
+      <p class="currency-title" *ngIf="!isWalletList">
+        {{ selectedCurrencyTitle }}
+      </p>
+    </div>
+
+    <div class="balances" *ngIf="isWalletList">
+      <p class="title">Choose your balance</p>
+      <div
+        class="balance-card"
+        *ngFor="let balance of userInfo?.profile?.balances"
+        (click)="selectCurrency(balance)"
+      >
+        <p>
+          {{ balance.currency.country }}-{{ balance.currency.currency }}({{
+            balance.currency.symbol
+          }}) : {{ balance.balance | number }}
+        </p>
+      </div>
+    </div>
+
+    <div class="currency-details" *ngIf="!isWalletList">
+      <div
+        class="currency-detail"
+        *ngFor="let walletDetail of walletCurrencyList"
+      >
+        <div class="sign-detail">
+          <img
+            src="/assets/images/icons/negative-sign.svg"
+            *ngIf="walletDetail.amount <= 0"
+          />
+          <img
+            src="/assets/images/icons/plus-sign.svg"
+            *ngIf="walletDetail.amount > 0"
+          />
+          <p class="wallet-type" [class.less-amount]="walletDetail.amount <= 0">
+            {{ walletDetail.amount_type_text }}
+          </p>
+        </div>
+
+        <p *ngIf="walletDetail.transaction">
+          {{ walletDetail.transaction.product.title }}
+          {{ walletDetail.transaction.product.currency_data.symbol
+          }}{{ walletDetail.transaction.original_amount }}
+        </p>
+
+        <p
+          *ngIf="
+            walletDetail.digital_order &&
+            walletDetail.digital_order.order_items?.length == 1
+          "
+        >
+          {{ walletDetail.digital_order.order_items[0].product.title }}
+          {{
+            walletDetail.digital_order.order_items[0].product_percent_price
+              ?.title
+          }}
+          {{
+            walletDetail.digital_order.order_items[0].product.currency_data
+              .symbol
+          }}{{ walletDetail.digital_order.order_items[0].unit_price }}
+        </p>
+
+        <p *ngIf="walletDetail.related_exchange_data">
+          {{ walletDetail.related_exchange_data.to_currency_data.country }} -
+          {{ walletDetail.related_exchange_data.to_currency_data.currency }}({{
+            walletDetail.related_exchange_data.to_currency_data.symbol
+          }}) Rate: {{ walletDetail.related_exchange_data.rate }}
+        </p>
+
+        <p class="wallet-type" [class.less-amount]="walletDetail.amount <= 0">
+          {{ walletDetail.currency_data.symbol }}
+          {{ mathAbs(walletDetail.amount) }}
+        </p>
+        <p>
+          {{
+            (
+              walletDetail.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).date
+          }}
+          {{
+            (
+              walletDetail.created_time
+              | date : "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).time
+          }}
+        </p>
+
+        <p *ngIf="walletDetail.digital_order">
+          Order Id: {{ walletDetail.digital_order.id }}
+        </p>
+        <p *ngIf="!walletDetail.digital_order">REFID: {{ walletDetail.id }}</p>
+
+        <button
+          mat-raised-button
+          class="help-button"
+          *ngIf="
+            walletDetail.digital_order &&
+            walletDetail.digital_order.order_items?.length > 1
+          "
+          (click)="digitalOrderDetail(walletDetail.digital_order.order_items)"
+        >
+          Order Items
+        </button>
+      </div>
+      <div *ngIf="!this.isFinish" class="center">
+        <button mat-raised-button (click)="onScroll()">Show More</button>
+      </div>
+    </div>
+  </div>
+</div>

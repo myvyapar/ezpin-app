@@ -1,0 +1,150 @@
+@import 'variables';
+
+::ng-deep {
+  .mat-bottom-sheet-container {
+    background-color: $light-black;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding: 0;
+  }
+}
+
+.container-bottom-sheet {
+  padding: 8px 16px;
+
+  @media (max-width: 568px) {
+    font-size: 12px;
+  }
+
+  .descriptions{
+    button{
+      width: 100%;
+      background-color: $blue;
+      color: $white;
+      margin: $base-margin 0;
+    }
+    
+  }
+}
+
+.product-count {
+  border-bottom: 2px solid $white;
+  margin-top: 2*$small-margin;
+
+  .counter {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .count {
+    color: $white;
+  }
+
+  img {
+    cursor: pointer;
+    width: 20px;
+    height: 100%;
+  }
+}
+
+.product-status {
+  color: $yellow;
+  margin: $small-margin;
+}
+
+.product-info {
+  margin: $base-margin 0;
+  display: flex;
+
+  img {
+    width: 120px;
+    max-height: 80px;
+  }
+
+  .product-price {
+    padding: 0 $base-padding;
+
+    p {
+      color: $white;
+    }
+  }
+}
+
+.form {
+  margin: 2*$small-margin 0;
+  padding: 2*$small-padding;
+  background-color: $dark-gray;
+  border-radius: $small-radius;
+
+  input {
+    width: 100%;
+    font-size: 16px;
+    background-color: inherit;
+    border: none;
+    color: $light-gray;
+  }
+
+  ::placeholder {
+    color: $light-gray;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: $light-gray;
+  }
+
+  ::-ms-input-placeholder {
+    color: $light-gray;
+  }
+
+}
+
+.range-input {
+  color: $white;
+  margin: 0;
+}
+
+.button {
+  margin-top: 2*$small-margin;
+  cursor: pointer;
+
+  .addToBasket {
+    padding: $base-padding 2*$small-padding;
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 24px;
+      height: 100%;
+      filter: invert(100%);
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .addButton {
+    display: flex;
+
+    .checkoutButton,
+    .continueButton {
+      flex: 1;
+      text-align: center;
+      color: $black;
+      padding: $base-padding 2*$small-padding;
+    }
+
+    .checkoutButton {
+      background-color: $dark-red;
+      color: $white;
+    }
+
+    .continueButton {
+      background-color: $white;
+    }
+  }
+
+}

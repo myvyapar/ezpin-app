@@ -1,0 +1,226 @@
+
+@import "variables";
+
+.bulk-activate {
+  width: 100%;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+
+  .category {
+    width: 25%;
+    padding: 0 $small-padding;
+    margin-top: $base-margin;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      width: 33.33%;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      border-radius: $small-radius;
+      object-fit: cover;
+    }
+
+    p {
+      text-align: center;
+      color: $white-smoke;
+      margin: 0;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+.products {
+  margin-top: $base-margin;
+
+  .product {
+    display: flex;
+    align-items: flex-start;
+    background-color: #f6f6f6;
+    padding: $base-padding;
+    border-radius: $small-radius;
+    margin-top: $base-margin;
+    cursor: pointer;
+
+    @media (max-width: 568px) {
+      margin-top: $small-margin;
+      padding: $small-padding;
+    }
+
+    .product-image {
+      flex-shrink: 0;
+      width: 150px;
+      height: auto;
+      border-radius: $small-radius;
+      object-fit: contain;
+
+      @media (max-width: 568px) {
+        width: 120px;
+      }
+    }
+
+    .info {
+      flex-grow: 1;
+      min-width: 0;
+      padding: 0 $base-padding;
+
+      p {
+        color: $dark-gray;
+        margin: 0;
+      }
+
+      .text {
+        color: $red;
+      }
+
+      @media (max-width: 568px) {
+        font-size: 12px;
+      }
+
+      .product-status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2 * $small-margin;
+      }
+    }
+  }
+}
+
+.back-button {
+  color: $dark-red;
+  margin: 2 * $small-margin 0;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+}
+
+.product-detail {
+  .title {
+    font-size: $primary-title;
+    color: $white;
+    margin: $base-margin 0;
+  }
+
+  .product-image {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 150px;
+      height: auto;
+      border-radius: $small-radius;
+      object-fit: contain;
+
+      @media (max-width: 568px) {
+        width: 120px;
+      }
+    }
+  }
+
+  .price-form {
+    p {
+      color: $white;
+      margin: $small-margin 0;
+    }
+  }
+
+  .quantity {
+    p {
+      color: $light-gray;
+      margin: $small-margin 0;
+    }
+  }
+
+  .price-error {
+    color: $white;
+    margin: $small-margin 0;
+  }
+
+  .quantity-error {
+    color: $dark-red;
+    margin: $small-margin 0;
+  }
+
+  .price-form,
+  .quantity,
+  .serial-form {
+    width: 100%;
+    margin: $base-margin auto;
+    padding: $small-padding 2 * $small-padding;
+    background-color: $dark-gray;
+    border-radius: $small-radius;
+
+    ion-input {
+      --background: transparent;
+      --color: #{$white};
+      --placeholder-color: #{$light-gray};
+      --padding-start: 0;
+      --padding-end: 0;
+      font-size: $base-font;
+      width: 100%;
+    }
+  }
+
+  .button {
+    margin-top: 2 * $small-margin;
+
+    .checkoutButton {
+      width: 100%;
+      --background: #{$dark-red};
+      --color: #{$black};
+      --border-radius: 0;
+      margin: 0;
+    }
+
+    .checkoutButton.diActive {
+      --background: #{$light-gray};
+    }
+  }
+}
+
+.center {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.ng-lazyloading {
+  animation: blink 1s infinite;
+}
+
+.ng-lazyloaded {
+  animation: singleblink 1s;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes singleblink {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

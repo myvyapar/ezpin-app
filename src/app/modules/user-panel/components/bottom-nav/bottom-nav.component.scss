@@ -1,0 +1,103 @@
+
+@import "variables";
+
+.bottom-nav {
+  padding: 0;
+  background-color: $nav-background;
+  // width: 100%;
+}
+
+
+.notShow {
+  display: none;
+}
+
+.nav-list {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  --background: #{$nav-background};
+  border: 0;
+}
+
+ion-tab-button {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  height: 64px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  --background: transparent;
+  --background-focused: transparent;
+  --background-focused-opacity: 0;
+  --ripple-color: transparent;
+  --color: #{$white};
+  --color-selected: #{$white};
+  opacity: 1;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  gap: 2px;
+  cursor: pointer;
+
+  p {
+    font-size: 17px;
+    line-height: 20px;
+    margin: 0;
+    color: $white;
+    white-space: nowrap;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex: 0 0 auto;
+
+    @media (max-width: 768px) {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  img.wishlist-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+
+    @media (max-width: 768px) {
+      width: 26px;
+      height: 26px;
+    }
+  }
+}
+
+ion-tab-button.not-selected {
+  opacity: 0.48;
+}
+
+ion-tab-button.egift-item {
+  --color: #{$white};
+}
+
+ion-tab-button::part(native) {
+  padding: 0;
+}
+
+ion-tab-button::part(indicator) {
+  display: none;
+}
+
+ion-tab-button::part(native):focus {
+  outline: none;
+}

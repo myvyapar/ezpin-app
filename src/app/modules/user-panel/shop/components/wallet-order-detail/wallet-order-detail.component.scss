@@ -1,0 +1,35 @@
+@import 'variables';
+
+.tables {
+
+    .table-title {
+        text-align: center;
+        color: $white;
+    }
+
+    table {
+        width: 100%;
+
+        @media (min-width: 468px) {
+            width: 420px;
+        }
+    }
+
+    table,
+    th,
+    td {
+        border-bottom: 1px solid $white-smoke;
+        border-collapse: collapse;
+        text-align: center;
+        font-weight: normal;
+        color: $white;
+        font-size: 14px;
+    }
+
+    th,
+    td {
+        width: 33.3%;
+        padding: $small-padding 0;
+    }
+
+}

@@ -1,0 +1,12 @@
+<div class="physical">
+  <div class="tab-container">
+    <mat-tab-group (selectedTabChange)="changeTabSelect($event)" *ngIf="showTab" [(selectedIndex)]="selectedTab">
+      <mat-tab label="Single"></mat-tab>
+      <mat-tab label="Bulk"></mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="container">
+    <single-activate *ngIf="isSingleComponent"></single-activate>
+    <bulk-activate *ngIf="!isSingleComponent" (showTab)="onShowTab($event)"></bulk-activate>
+  </div>
+</div>

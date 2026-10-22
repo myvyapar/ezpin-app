@@ -1,0 +1,110 @@
+<div class="crypto-order">
+  <p class="back-button"><span (click)="backStep()">Back</span></p>
+  <p class="blue-title">Finalize Order</p>
+  <p class="hint">
+    This is the actual order you are going to checkout. you got only 5 minutes
+    to finalize this order.
+  </p>
+  <div class="timer">
+    Time Remaining: {{ remaining.minutes }}:{{ remaining.seconds }}
+  </div>
+  <div class="table-info">
+    <table>
+      <tr>
+        <td>1 BTC Price</td>
+        <td>{{ order.currency_data.symbol }}{{ order.crypto_price }}</td>
+      </tr>
+      <tr>
+        <td>Amount if Bitcoin</td>
+        <td>{{ order.crypto_amount }}</td>
+      </tr>
+      <tr>
+        <td>Network fee</td>
+        <td>{{ order.network_fee }}</td>
+      </tr>
+      <tr>
+        <td>Commission {{ order.commission_percent }}%</td>
+        <td>{{ order.currency_data.symbol }}{{ order.commission_price }}</td>
+      </tr>
+      <tr>
+        <td>Purchase Amount</td>
+        <td>{{ order.currency_data.symbol }}{{ order.requested_price }}</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>{{ order.currency_data.symbol }}{{ order.price }}</td>
+      </tr>
+      <tr>
+        <td>Created Date</td>
+        <td>
+          {{
+            (
+              order.created_time
+              | date: "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).date
+          }}
+          {{
+            (
+              order.created_time
+              | date: "MMMM d, y, h:mm:ss a z"
+              | convertTimezone
+            ).time
+          }}
+        </td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td>{{ order.status_text }}</td>
+      </tr>
+    </table>
+  </div>
+  <p class="blue-title">Delivery method:</p>
+  <div class="select-pay">
+    <div
+      class="choice"
+      [class.selected-button]="selectedPay == 'pin'"
+      (click)="selectPay('pin')"
+    >
+      <p>Pin</p>
+    </div>
+    <div
+      class="choice"
+      [class.selected-button]="selectedPay == 'address'"
+      (click)="selectPay('address')"
+    >
+      <p>Address</p>
+    </div>
+  </div>
+  <div class="select-pay select-pin" *ngIf="selectedPay == 'pin'">
+    <div
+      class="choice-pin"
+      [class.selected-button]="selectedPin == 'phone'"
+      (click)="selectPin('phone')"
+    >
+      <p>SMS</p>
+    </div>
+    <div
+      class="choice-pin"
+      [class.selected-button]="selectedPin == 'whatsapp'"
+      (click)="selectPin('whatsapp')"
+    >
+      <p>Whatsapp</p>
+    </div>
+    <div
+      class="choice-pin"
+      [class.selected-button]="selectedPin == 'email'"
+      (click)="selectPin('email')"
+    >
+      <p>Email</p>
+    </div>
+  </div>
+  <div class="form">
+    <input matInput [placeholder]="inputPlaceholder" [formControl]="userInfo" />
+  </div>
+  <div class="button">
+    <button mat-raised-button class="checkoutButton" (click)="finalPay()">
+      Final Pay
+    </button>
+  </div>
+</div>

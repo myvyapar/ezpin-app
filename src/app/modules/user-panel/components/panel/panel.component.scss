@@ -1,0 +1,32 @@
+@import 'variables';
+
+.panel {
+  min-height: 100vh;
+  z-index: 100;
+
+  .router-panel {
+    display: block;
+    padding-bottom: $distance-bottom-nav;
+    --padding-bottom: #{$distance-bottom-nav};
+  }
+
+  app-toolbar {
+    background-color: $nav-background;
+    display: block;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+  }
+
+  .custom-page {
+    padding-bottom: $ms-padding;
+  }
+
+  bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+}

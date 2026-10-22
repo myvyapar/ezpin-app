@@ -1,0 +1,26 @@
+@import 'variables';
+
+.first-step-confirm {
+  .title {
+    font-family: $bold-font;
+  }
+}
+
+
+.confirm,
+.cancel {
+  border-radius: $small-radius;
+  text-align: center;
+  margin-top: 2*$small-margin;
+  padding: $small-padding;
+  cursor: pointer;
+}
+
+.confirm {
+  background-color: $dark-gray;
+  color: $white;
+}
+
+.cancel {
+  border: 1px solid $light-gray;
+}

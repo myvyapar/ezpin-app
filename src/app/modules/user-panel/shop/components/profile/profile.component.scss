@@ -1,0 +1,41 @@
+@import 'variables';
+
+.back-button {
+    color: $dark-red;
+    padding: 2*$small-margin 0;
+
+    span {
+        cursor: pointer;
+    }
+}
+
+.fields {
+    width: 100%;
+    margin-top: $base-margin;
+    padding: 2*$small-padding $base-padding;
+    background-color: $dark-gray;
+    border-radius: $small-radius;
+
+    p {
+        color: $white;
+        margin: $small-margin 0px;
+    }
+}
+
+.sign-out {
+    margin: $ms-margin 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: 40px;
+        cursor: pointer;
+    }
+
+    p {
+        margin-top: $small-margin;
+        cursor: pointer;
+        color: $white;
+    }
+}

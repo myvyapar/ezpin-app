@@ -1,0 +1,16 @@
+@import 'variables';
+
+mat-expansion-panel {
+  margin: $base-margin 0;
+  width: 400px;
+  background-color: $light-gray;
+  color: $white;
+
+  @media (max-width: 568px) {
+    width: 300px;
+  }
+
+  mat-panel-title {
+    color: $white;
+  }
+}

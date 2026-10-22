@@ -1,0 +1,16 @@
+<div class="resend-bottom-sheet">
+  <div class="container">
+    <p class="title">Resend To</p>
+    <button mat-raised-button (click)="submitResend(false,false)" *ngIf="data.email || data.phone || data.whatsapp">
+      <span *ngIf="data.email && !data.phone && !data.whatsapp">{{data.email}} </span>
+      <span *ngIf="!data.email && data.phone && !data.whatsapp">{{data.phone}} </span>
+      <span *ngIf="!data.email && !data.phone && data.whatsapp">{{data.whatsapp}} </span>
+    </button>
+    <button mat-raised-button *ngIf="subUserDetail" (click)="submitResend(false,true)">
+      {{subUserDetail?.email}}
+    </button>
+    <button mat-raised-button (click)="submitResend(true,false)">
+      {{adminEmail}}
+    </button>
+  </div>
+</div>

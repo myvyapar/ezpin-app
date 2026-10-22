@@ -1,0 +1,34 @@
+<div class="regions-dialog" >
+
+  <div class="dialog-container">
+
+    <p class="title">Regions</p>
+
+    <ion-list class="region-list" lines="none">
+
+      <!-- All Regions -->
+      <ion-item class="region" button detail="false" (click)="selectRegion(allRegion)">
+
+        <ion-img slot="start" src="/assets/images/icons/world-flag.png" class="region-flag">
+        </ion-img>
+
+        <ion-label>All</ion-label>
+
+      </ion-item>
+
+      <!-- Dynamic Regions -->
+      <ion-item *ngFor="let region of data?.regions" class="region" button detail="false"
+        (click)="selectRegion(region)">
+
+        <ion-img slot="start" [src]="region.image" class="region-flag">
+        </ion-img>
+
+        <ion-label>{{ region.name }}</ion-label>
+
+      </ion-item>
+
+    </ion-list>
+
+  </div>
+
+</div>
